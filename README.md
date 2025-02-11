@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### Video preview
 
-## Getting Started
+<!-- video here -->
 
-First, run the development server:
+### Points of improvement
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The first point I'd improve would be performance, as when the list of Locations/Assets is too long it takes some time to load.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Points to improve performance:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Virtualizating the list of assets;
+- Caching API requests;
+- Debuncing the search input;
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+There are some minor improvements that could be done in order to improve UI/UX in general.
 
-## Learn More
+Styling:
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Make it more pixel perfect according to figma;
+- Create more components like Button and Input to be reusable trhough out the application;
+- Add a loading state when making async requests like changing company or adding/changing filters;
