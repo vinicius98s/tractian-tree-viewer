@@ -3,7 +3,7 @@
 import { memo, useMemo, useState } from "react";
 import Image from "next/image";
 
-import { Asset, Location, TreeNode } from "@/lib/data";
+import { Asset, TreeNode } from "@/lib/data";
 
 import asset from "../../public/asset.png";
 import location from "../../public/location.png";
@@ -14,15 +14,15 @@ type Props = {
 };
 
 const getIcon = (node: TreeNode) => {
-  if ((node as Asset).sensorType) {
+  if ("sensorType" in node && node.sensorType) {
     return <Image src={component} alt="Component icon" />;
   }
 
-  if (!(node as Location).parentId) {
-    return <Image src={location} alt="Location icon" />;
+  if ("locationId" in node && node.locationId) {
+    return <Image src={asset} alt="Asset icon" />;
   }
 
-  return <Image src={asset} alt="Asset icon" />;
+  return <Image src={location} alt="Location icon" />;
 };
 
 const hasChildrenCriticalSensor = (nodes?: TreeNode[]): boolean => {
@@ -126,12 +126,12 @@ const renderNode = (
   );
 };
 
-function searchTreeNodes(nodes: TreeNode[], search: string): TreeNode[] {
+const filterTreeNodes = (nodes: TreeNode[], search: string): TreeNode[] => {
   const lowerSearch = search.toLowerCase();
   return nodes
     .map((node) => {
       const filteredChildren = node.children
-        ? searchTreeNodes(node.children, search)
+        ? filterTreeNodes(node.children, search)
         : [];
 
       const matches = node.name.toLowerCase().includes(lowerSearch);
@@ -154,7 +154,7 @@ export function TreeView(props: Props) {
 
   const filteredTreeData = useMemo(() => {
     if (search) {
-      return searchTreeNodes(props.treeData, search);
+      return filterTreeNodes(props.treeData, search);
     }
     return props.treeData;
   }, [props.treeData, search]);
